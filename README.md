@@ -1,2 +1,2 @@
 # swsi-health
-A simple health syste based on Microsoft HealthVault
+A simple health system based on Microsoft HealthVault
