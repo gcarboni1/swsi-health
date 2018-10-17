@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HVClientSample", "HVClientSample.csproj", "{D817A15C-650D-49BE-96F8-C7772EC96DED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionApp1", "..\FunctionApp1\FunctionApp1.csproj", "{4F71AC5F-F312-44E6-8801-BE5993A12C18}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D817A15C-650D-49BE-96F8-C7772EC96DED} = {D817A15C-650D-49BE-96F8-C7772EC96DED}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D817A15C-650D-49BE-96F8-C7772EC96DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D817A15C-650D-49BE-96F8-C7772EC96DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D817A15C-650D-49BE-96F8-C7772EC96DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D817A15C-650D-49BE-96F8-C7772EC96DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F71AC5F-F312-44E6-8801-BE5993A12C18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F71AC5F-F312-44E6-8801-BE5993A12C18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F71AC5F-F312-44E6-8801-BE5993A12C18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F71AC5F-F312-44E6-8801-BE5993A12C18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E98D2BBE-704C-476D-B3E5-23356334D990}
+	EndGlobalSection
+EndGlobal

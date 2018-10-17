@@ -1,0 +1,20 @@
+{
+  "disabled": false,
+  "bindings": [
+    {
+      "name": "myBlob",
+      "type": "blobTrigger",
+      "direction": "in",
+      "path": "doc-repository/{name}",
+      "connection": "AzureWebJobsStorage"
+    },    
+    {
+      "name": "outputQueueItem",
+      "type": "queue",
+      "direction": "out",
+      "queueName": "output-queue",
+      "connection": "AzureWebJobsStorage"
+
+    }
+  ]
+}
