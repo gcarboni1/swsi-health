@@ -17,30 +17,47 @@ namespace FunctionApp1
     {
         [FunctionName("GetWeight")]
         public static async Task<HttpResponseMessage> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)]
             HttpRequestMessage req, TraceWriter log)
         {
-            log.Info("Weight request...calling Health Vault server");
-            DataObject dataObj = new DataObject();
-            dataObj.Id = "Id";
-            dataObj.Name = "Name";
-            dataObj.Size = "Size";
+            try
+            {
+                log.Info("Weight request...calling Health Vault server");
+                HVClient clientSample = new HVClient();
+                HealthRecordItemCollection items = clientSample.GetWeightFromHealthVault();
+                JObject jsonResponse = CreateJsonResponse(items);
 
-            //await outputQueueItem.AddAsync(dataObj);
+                if (jsonResponse["status"].ToString().Equals("ok"))
+                    return req.CreateResponse(HttpStatusCode.OK, jsonResponse);
+                else
+                    return req.CreateResponse(HttpStatusCode.NoContent, jsonResponse);
+            }
+            catch (global::System.Exception)
+            {
+                JObject jsonResponse = CreateUnauthorizedResponse();
+                return req.CreateResponse(HttpStatusCode.Unauthorized, jsonResponse);
+            }
+        }
+
+        private static JObject CreateUnauthorizedResponse() {
+            JObject result = new JObject();
+            JObject resultObj = new JObject();
+            result["status"] = "Access to HealthVault is denied";
+            resultObj["getWeightResponse"] = result;
+            return resultObj;
+        }
 
 
-
-            HVClient clientSample = new HVClient();
-            //clientSample.ProvisionApplication();
-            HealthRecordItemCollection items = clientSample.GetWeightFromHealthVault();
-
+        private static JObject CreateJsonResponse(HealthRecordItemCollection items)
+        {
+            JObject result = new JObject();
+            JObject resultObj = new JObject();
             JArray itemArr = new JArray();
             if (items != null)
             {
                 foreach (HealthRecordItem item in items)
                 {
                     ItemTypes.Weight weight = (ItemTypes.Weight)item;
-
                     JObject itemW = new JObject();
                     itemW["date"] = weight.When.ToString();
                     itemW["value"] = weight.Value.Kilograms.ToString();
@@ -48,23 +65,23 @@ namespace FunctionApp1
                     itemArr.Add(itemW);
                 }
             }
-            JObject result = new JObject();
+            result["count"] = items.Count();
+            result["result"] = itemArr;
             if (itemArr.Count > 0)
             {
-                result["result"] = itemArr;
-                return req.CreateResponse(HttpStatusCode.OK, result);
-            }          
-                
+                resultObj["status"] = "ok";
+                resultObj["getWeightResponse"] = result;
+                return resultObj;
+            }
             else
             {
-                result["result"] = null;
-                return req.CreateResponse(HttpStatusCode.NoContent, result);
-            }
-                
-                      
-            
-
-
+                resultObj["status"] = "no content";
+                resultObj["getWeightResponse"] = result;
+                return resultObj;
+            }            
         }
+
+
+
     }
 }
