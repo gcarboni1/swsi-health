@@ -64,7 +64,8 @@ $(document).ready(function () {
 
     function patientData() {
         return $.ajax({
-            url: baseUrl + "/demographics/ehr/" + ehrId + "/party",
+            //url: baseUrl + "/demographics/ehr/" + ehrId + "/party",
+            url: "http://localhost:7071/api/GetAnagraphic",
             type: 'GET',
             headers: {
                 "Ehr-Session": sessionId

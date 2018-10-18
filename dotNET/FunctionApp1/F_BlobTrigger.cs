@@ -26,7 +26,7 @@ namespace FunctionApp1
             log.Info($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
             HVClient clientSample = new HVClient();
             //clientSample.ProvisionApplication();
-            clientSample.SetWeightOnHealthVault(110);
+            clientSample.SetTemperatureOnHealthVault(110);
                    
             /*DataObject data = new DataObject();
             data.Id = "Id";

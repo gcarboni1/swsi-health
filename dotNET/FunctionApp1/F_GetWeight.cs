@@ -24,6 +24,7 @@ namespace FunctionApp1
             {
                 log.Info("Weight request...calling Health Vault server");
                 HVClient clientSample = new HVClient();
+                
                 HealthRecordItemCollection items = clientSample.GetWeightFromHealthVault();
                 JArray jsonResponse = CreateJsonResponse(items);
                 if (jsonResponse.Count > 0)                    

@@ -9,7 +9,9 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Windows.Forms;
+using System.Xml;
 using Microsoft.Health;
 using Microsoft.Health.ItemTypes;
 using ItemTypes = Microsoft.Health.ItemTypes;
@@ -247,11 +249,7 @@ namespace HVClientSample
         }
 
 
-        /// <summary>
-        /// Creates a connection to HealthVault and obtains weight data
-        /// </summary>
-        /// <returns></returns>
-        public String GetWeightFromHealthVault_str()
+        public HealthRecordItemCollection GetTemperatureFromHealthVault()
         {
             if (!_isProvisioned)
             {
@@ -265,15 +263,103 @@ namespace HVClientSample
             HealthRecordAccessor accessor = new HealthRecordAccessor(connection, RecordId);
 
             HealthRecordSearcher searcher = accessor.CreateSearcher();
-            HealthRecordFilter filter = new HealthRecordFilter(ItemTypes.Weight.TypeId);
+            //HealthRecordFilter filter = new HealthRecordFilter(ItemTypes.Weight.TypeId);
+            HealthRecordFilter filter = new HealthRecordFilter(ItemTypes.VitalSigns.TypeId);
             searcher.Filters.Add(filter);
-            HealthRecordItemCollection items = searcher.GetMatchingItems()[0];          
-            return items.ToString();
+            HealthRecordItemCollection items = searcher.GetMatchingItems()[0];
+
+            return items;
         }
 
+        public void SetTemperatureOnHealthVault(double tempValue)
+        {
+            try
+            {
+                if (!_isProvisioned)
+                {
+                    MessageBox.Show("Please provision application first");
+                    return;
+                }
 
+                HealthClientAuthorizedConnection connection =
+                    HealthClientApplication.CreateAuthorizedConnection(PersonId);
 
+                HealthRecordAccessor accessor = new HealthRecordAccessor(connection, RecordId);
 
+                /*
+                TemperatureMeasurement temperature = new TemperatureMeasurement(tempValue);
+
+                VitalSigns vitalSign = new VitalSigns();
+                vitalSign.When = new HealthServiceDateTime(DateTime.UtcNow);
+
+                CodableValue codableValue = new CodableValue();
+                codableValue.Text = "celsius";
+
+                VitalSignsResultType vitalSignsResultType = new VitalSignsResultType();
+                vitalSignsResultType.Unit = codableValue;                
+                vitalSignsResultType.TextValue = "Temperature";
+                vitalSignsResultType.Value = tempValue;
+                vitalSign.VitalSignsResults.Add(vitalSignsResultType);
+                */
+
+                
+                string xml= "<vital-signs>"+
+                    "<when>"+
+                        "<date><y>2005</y><m>1</m><d>1</d></date>"+
+                        "<time><h>6</h><m>0</m><s>0</s><f>0</f></time>"+
+                    "</when>"+
+                    "<vital-signs-results>" +
+                        "<title> " +
+                            "<text>Temperature</text> " +
+                            "<code> " +
+                                "<value>Tmp</value> " +
+                                "<family>wc</family> " +
+                                "<type>vital - statistics</type> " +
+                                "<version> 1 </version> " +
+                            "</code> " +
+                        "</title> " +
+                        "<value> 68 </value> " +
+                        "<unit> " +
+                            "<text> celsius </text> " +
+                            "<code> " +
+                                "<value> Cel </value> " +
+                                "<family> wc </family> " +
+                                "<type> lab - results - units </type> " +
+                                "<version> 1 </version> " +
+                            "</code> " +
+                        "</unit> " +
+                        "<reference - minimum> 65 </reference - minimum > " +
+                        "<reference - maximum > 90 </ reference - maximum > " +
+                        "<text - value/> " +
+                        "<flag> " +
+                            "<text> Normal </text> " +
+                            "<code> " +
+                                "<value> N </value> " +
+                                "<family> wc </family> " +
+                                "<type> lab - result - flag </type> " +
+                                "<version> 1 </version>" +
+                            "</code> " +
+                        "</flag> " +
+                    "</vital - signs - results> " +
+                    "<site> HV_VitalSign@live.com </site> " +
+                    "<position> HV Vital Sign</position> " +
+                "</vital - signs>";
+
+                StringWriter sw = new StringWriter();
+                XmlWriter xw = XmlWriter.Create(sw);
+                
+                xw.WriteCData(xml);
+                    
+                VitalSigns vitalSign = new VitalSigns();
+                vitalSign.WriteXml(xw);
+
+                accessor.NewItem(vitalSign);
+            }
+            catch (Exception ex) 
+            {                
+                throw;
+            }
+        }
 
 
 
