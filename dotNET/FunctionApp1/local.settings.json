@@ -1,10 +1,14 @@
 {
-    "IsEncrypted": false,
+  "IsEncrypted": false,
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
     "ApplicationId": "136d030c-4a10-4e7d-a680-8c3d8b4ffe88",
     "ShellUrl": "https://account.healthvault-ppe.com/",
     "HealthServiceUrl": "https://platform.healthvault-ppe.com/platform/"
+  },
+  "Host": {
+    "LocalHttpPort": 7071,
+    "CORS": "*"
   }
 }

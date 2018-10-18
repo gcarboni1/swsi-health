@@ -25,9 +25,8 @@ namespace FunctionApp1
                 log.Info("Weight request...calling Health Vault server");
                 HVClient clientSample = new HVClient();
                 HealthRecordItemCollection items = clientSample.GetWeightFromHealthVault();
-                JObject jsonResponse = CreateJsonResponse(items);
-
-                if (jsonResponse["status"].ToString().Equals("ok"))
+                JArray jsonResponse = CreateJsonResponse(items);
+                if (jsonResponse.Count > 0)                    
                     return req.CreateResponse(HttpStatusCode.OK, jsonResponse);
                 else
                     return req.CreateResponse(HttpStatusCode.NoContent, jsonResponse);
@@ -48,7 +47,7 @@ namespace FunctionApp1
         }
 
 
-        private static JObject CreateJsonResponse(HealthRecordItemCollection items)
+        private static JArray CreateJsonResponse(HealthRecordItemCollection items)
         {
             JObject result = new JObject();
             JObject resultObj = new JObject();
@@ -59,9 +58,9 @@ namespace FunctionApp1
                 {
                     ItemTypes.Weight weight = (ItemTypes.Weight)item;
                     JObject itemW = new JObject();
-                    itemW["date"] = weight.When.ToString();
-                    itemW["value"] = weight.Value.Kilograms.ToString();
-                    itemW["misure"] = "Kilograms";
+                    itemW["time"] = weight.EffectiveDate.ToUniversalTime();
+                    itemW["weight"] = weight.Value.Kilograms.ToString();
+                    itemW["unit"] = "kilograms";
                     itemArr.Add(itemW);
                 }
             }
@@ -71,13 +70,13 @@ namespace FunctionApp1
             {
                 resultObj["status"] = "ok";
                 resultObj["getWeightResponse"] = result;
-                return resultObj;
+                return itemArr;
             }
             else
             {
                 resultObj["status"] = "no content";
                 resultObj["getWeightResponse"] = result;
-                return resultObj;
+                return itemArr;
             }            
         }
 

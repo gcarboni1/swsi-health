@@ -57,10 +57,11 @@ C:\swsi-health\swsi-health\dotNET\hvclientsample\bin\Debug\Microsoft.Health.Item
 C:\swsi-health\swsi-health\dotNET\hvclientsample\bin\Debug\Microsoft.Health.ItemTypes.Old.pdb
 C:\swsi-health\swsi-health\dotNET\hvclientsample\bin\Debug\Microsoft.Health.Web.pdb
 C:\swsi-health\swsi-health\dotNET\hvclientsample\bin\Debug\Microsoft.Health.Web.Mvc.pdb
-C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.csprojResolveAssemblyReference.cache
 C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.MainForm.resources
 C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.Properties.Resources.resources
 C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.csproj.GenerateResource.Cache
 C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.csproj.CoreCompileInputs.cache
 C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.exe
 C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.pdb
+C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.csprojAssemblyReference.cache
+C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.csproj.CopyComplete
