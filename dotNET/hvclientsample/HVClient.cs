@@ -286,11 +286,25 @@ namespace HVClientSample
 
                 HealthRecordAccessor accessor = new HealthRecordAccessor(connection, RecordId);
 
-                /*
+                
                 TemperatureMeasurement temperature = new TemperatureMeasurement(tempValue);
 
                 VitalSigns vitalSign = new VitalSigns();
-                vitalSign.When = new HealthServiceDateTime(DateTime.UtcNow);
+
+                //generate random date
+                DateTime startDate = new DateTime(2018, 1, 1);
+                DateTime endDate = new DateTime(2018, 12, 30);
+
+                TimeSpan timeSpan = endDate - startDate;
+                var randomTest = new Random();
+                TimeSpan newSpan = new TimeSpan(0, randomTest.Next(0, (int)timeSpan.TotalMinutes), 0);
+                DateTime newDate = startDate + newSpan;
+
+
+                //set time now
+                //vitalSign.When = new HealthServiceDateTime(DateTime.UtcNow);
+
+                vitalSign.When = new HealthServiceDateTime(newDate);
 
                 CodableValue codableValue = new CodableValue();
                 codableValue.Text = "celsius";
@@ -298,62 +312,13 @@ namespace HVClientSample
                 VitalSignsResultType vitalSignsResultType = new VitalSignsResultType();
                 vitalSignsResultType.Unit = codableValue;                
                 vitalSignsResultType.TextValue = "Temperature";
+                vitalSignsResultType.Title.Text = "Temperature";
                 vitalSignsResultType.Value = tempValue;
                 vitalSign.VitalSignsResults.Add(vitalSignsResultType);
-                */
-
-                
-                string xml= "<vital-signs>"+
-                    "<when>"+
-                        "<date><y>2005</y><m>1</m><d>1</d></date>"+
-                        "<time><h>6</h><m>0</m><s>0</s><f>0</f></time>"+
-                    "</when>"+
-                    "<vital-signs-results>" +
-                        "<title> " +
-                            "<text>Temperature</text> " +
-                            "<code> " +
-                                "<value>Tmp</value> " +
-                                "<family>wc</family> " +
-                                "<type>vital - statistics</type> " +
-                                "<version> 1 </version> " +
-                            "</code> " +
-                        "</title> " +
-                        "<value> 68 </value> " +
-                        "<unit> " +
-                            "<text> celsius </text> " +
-                            "<code> " +
-                                "<value> Cel </value> " +
-                                "<family> wc </family> " +
-                                "<type> lab - results - units </type> " +
-                                "<version> 1 </version> " +
-                            "</code> " +
-                        "</unit> " +
-                        "<reference - minimum> 65 </reference - minimum > " +
-                        "<reference - maximum > 90 </ reference - maximum > " +
-                        "<text - value/> " +
-                        "<flag> " +
-                            "<text> Normal </text> " +
-                            "<code> " +
-                                "<value> N </value> " +
-                                "<family> wc </family> " +
-                                "<type> lab - result - flag </type> " +
-                                "<version> 1 </version>" +
-                            "</code> " +
-                        "</flag> " +
-                    "</vital - signs - results> " +
-                    "<site> HV_VitalSign@live.com </site> " +
-                    "<position> HV Vital Sign</position> " +
-                "</vital - signs>";
-
-                StringWriter sw = new StringWriter();
-                XmlWriter xw = XmlWriter.Create(sw);
-                
-                xw.WriteCData(xml);
-                    
-                VitalSigns vitalSign = new VitalSigns();
-                vitalSign.WriteXml(xw);
-
                 accessor.NewItem(vitalSign);
+                
+
+               
             }
             catch (Exception ex) 
             {                

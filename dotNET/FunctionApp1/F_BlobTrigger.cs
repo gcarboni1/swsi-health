@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using HVClientSample;
 using Microsoft.Azure.WebJobs;
@@ -25,14 +26,10 @@ namespace FunctionApp1
         {            
             log.Info($"C# Blob trigger function Processed blob\n Name:{name} \n Size: {myBlob.Length} Bytes");
             HVClient clientSample = new HVClient();
-            //clientSample.ProvisionApplication();
-            clientSample.SetTemperatureOnHealthVault(110);
-                   
-            /*DataObject data = new DataObject();
-            data.Id = "Id";
-            data.Name = "Name";
-            data.Size = "Size";
-            */
+
+            Random rnd = new Random();
+            int temp = rnd.Next(36, 40);
+            clientSample.SetTemperatureOnHealthVault(temp);                               
             log.Info("Try to pop element into output-queue");        
             
 
@@ -40,4 +37,5 @@ namespace FunctionApp1
         
         }
     }
+
 }

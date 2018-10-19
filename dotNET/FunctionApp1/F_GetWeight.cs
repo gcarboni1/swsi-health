@@ -30,7 +30,7 @@ namespace FunctionApp1
                 if (jsonResponse.Count > 0)                    
                     return req.CreateResponse(HttpStatusCode.OK, jsonResponse);
                 else
-                    return req.CreateResponse(HttpStatusCode.NoContent, jsonResponse);
+                    return req.CreateResponse(HttpStatusCode.OK, jsonResponse);
             }
             catch (global::System.Exception)
             {
@@ -39,13 +39,6 @@ namespace FunctionApp1
             }
         }
 
-        private static JObject CreateUnauthorizedResponse() {
-            JObject result = new JObject();
-            JObject resultObj = new JObject();
-            result["status"] = "Access to HealthVault is denied";
-            resultObj["getWeightResponse"] = result;
-            return resultObj;
-        }
 
 
         private static JArray CreateJsonResponse(HealthRecordItemCollection items)
@@ -81,6 +74,14 @@ namespace FunctionApp1
             }            
         }
 
+        private static JObject CreateUnauthorizedResponse()
+        {
+            JObject result = new JObject();
+            JObject resultObj = new JObject();
+            result["status"] = "Access to HealthVault is denied";
+            resultObj["getWeightResponse"] = result;
+            return resultObj;
+        }
 
 
     }

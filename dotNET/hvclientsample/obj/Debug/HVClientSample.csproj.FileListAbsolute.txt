@@ -63,5 +63,5 @@ C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.csproj
 C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.csproj.CoreCompileInputs.cache
 C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.exe
 C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.pdb
-C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.csprojAssemblyReference.cache
 C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.csproj.CopyComplete
+C:\swsi-health\swsi-health\dotNET\hvclientsample\obj\Debug\HVClientSample.csprojAssemblyReference.cache

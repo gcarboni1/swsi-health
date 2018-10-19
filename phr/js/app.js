@@ -268,7 +268,8 @@ $(document).ready(function () {
 
     function getTemperature() {
         return $.ajax({
-            url: baseUrl + "/view/" + ehrId + "/body_temperature",
+            //url: baseUrl + "/view/" + ehrId + "/body_temperature",
+            url: "http://localhost:7071/api/GetTemperature",
             type: 'GET',
             headers: {
                 "Ehr-Session": sessionId
