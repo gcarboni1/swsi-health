@@ -5,6 +5,7 @@
   <ItemGroup>    
     <PackageReference Include="HealthVault.NET" Version="2.60.20205.1" />    
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="1.0.2" />    
+    <PackageReference Include="MongoDB.Driver" Version="2.7.0" />    
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
   <ItemGroup>
